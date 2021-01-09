@@ -1,0 +1,16 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+  <p><strong>First Name:</strong> {{ author.first_name }}</p> <!-- author detail link not yet defined -->
+  <p><strong>Last Name:</strong> {{ author.last_name }}</p>
+  <p><strong>Date of birth:</strong> {{ author.date_of_birth }}</p>
+  <p><strong>Died:</strong> {% if author.date_of_death %}{{ author.date_of_death }} {% else %} - {% endif %}</p>
+
+  <div style="margin-left:20px;margin-top:20px">
+    <h1>Books</h1>
+    {% for book in author.book_set.all %}
+        <a href="{% url 'book-detail' book.id %}">{{book.title}}</a>({{ book.bookinstance_set.all.count }})
+        <p>{{ book.summary }}</p>
+    {% endfor %}
+  </div>
+{% endblock %}
